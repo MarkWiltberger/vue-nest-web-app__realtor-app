@@ -12,11 +12,10 @@ import {
 import { HomeService } from './home.service';
 import { CreateHomeDto, HomeResponseDTO, UpdateHomeDto } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
-import { User } from 'src/user/decorators/user.decorator';
+import { User } from '../user/decorators/user.decorator';
 
 @Controller('home')
 export class HomeController {
-
   constructor(private readonly homeService: HomeService) {}
 
   @Get('/')

@@ -3,7 +3,7 @@ import {
   NotFoundException,
   NotImplementedException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { HomeResponseDTO } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
 
@@ -36,7 +36,6 @@ interface UpdateHomeParams {
   landSize?: number;
   propertyType?: PropertyType;
 }
-
 
 const homeSelect = {};
 
@@ -171,7 +170,6 @@ export class HomeService {
   }
 
   async deleteHomeById(id) {
-
     const deletedImages = await this.prismaService.image.deleteMany({
       where: {
         home_id: id,
@@ -181,7 +179,7 @@ export class HomeService {
     const deletedHome = await this.prismaService.home.delete({
       where: {
         id,
-      }
+      },
     });
 
     console.log(deletedHome);
