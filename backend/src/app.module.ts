@@ -19,10 +19,3 @@ import { UserInterceptor } from './user/interceptors/user.interceptor';
   ],
 })
 export class AppModule {}
-
-// SIGNUP
-
-// SIGNIN
-
-// ME - once they are logged in, identify who the are. can create
-// a ME route for this
