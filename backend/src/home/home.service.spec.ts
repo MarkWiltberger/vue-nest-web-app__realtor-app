@@ -93,7 +93,9 @@ describe('HomeService', () => {
         .spyOn(prismaService.home, 'findMany')
         .mockImplementation(mockPrismaFindNoHomes);
 
-      expect(service.getHomes(filters)).rejects.toThrowError(NotFoundException);
+      await expect(service.getHomes(filters)).rejects.toThrowError(
+        NotFoundException,
+      );
     });
   });
 });
