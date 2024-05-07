@@ -123,23 +123,10 @@ export class HomeService {
         realtor_id: 5,
       },
     });
-    // console.log({
-    //   address,
-    //   numberOfBedrooms,
-    //   numberOfBathrooms,
-    //   city,
-    //   landSize,
-    //   price,
-    //   propertyType,
-    //   images,
-    // });
-
-    // console.log(images);
 
     const homeImages = images.map((homeImage) => {
       return { ...homeImage, home_id: home.id };
     });
-    // console.log(homeImages);
 
     await this.prismaService.image.createMany({ data: homeImages });
 
@@ -181,8 +168,6 @@ export class HomeService {
         id,
       },
     });
-
-    console.log(deletedHome);
 
     if (!deletedHome) {
       throw new NotImplementedException();
