@@ -49,7 +49,6 @@ export class HomeController {
   @Post()
   createHome(@Body() newHome: CreateHomeDto, @User() user) {
     return user;
-    // return this.homeService.createHome(newHome);
   }
 
   @Put(':id')
@@ -65,7 +64,3 @@ export class HomeController {
     return this.homeService.deleteHomeById(id);
   }
 }
-
-// http://localhost:3000/home/Toronto/500000/1500000
-
-// http://localhost:3000/home?city=Toronto&minPrice=500000&maxPrice=1500000
