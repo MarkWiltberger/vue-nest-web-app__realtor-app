@@ -98,4 +98,19 @@ describe('HomeService', () => {
       );
     });
   });
+  describe('getHomeByID', () => {
+    it('should call prisma home. with correct params');
+    it('should return correctly formatted DTO when calling prisma home.');
+    it('should return NotFoundException if no homes found');
+  });
+
+  describe('createNewHome', () => {
+    it('should call prisma home. with correct params');
+    it('should return correctly formatted DTO');
+  });
+
+  describe('deleteHome', () => {
+    it('should call home. with correct params');
+    it('should return code that home has been deleted');
+  });
 });
