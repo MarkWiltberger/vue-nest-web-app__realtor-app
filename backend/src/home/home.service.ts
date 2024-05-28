@@ -37,7 +37,15 @@ interface UpdateHomeParams {
   propertyType?: PropertyType;
 }
 
-const homeSelect = {};
+const homeSelect = {
+  id: true,
+  address: true,
+  city: true,
+  price: true,
+  property_type: true,
+  number_of_bedrooms: true,
+  number_of_bathrooms: true,
+};
 
 @Injectable()
 export class HomeService {
@@ -46,13 +54,7 @@ export class HomeService {
   async getHomes(filter: GetHomesParam): Promise<HomeResponseDTO[]> {
     const homes = await this.prismaService.home.findMany({
       select: {
-        id: true,
-        address: true,
-        city: true,
-        price: true,
-        property_type: true,
-        number_of_bedrooms: true,
-        number_of_bathrooms: true,
+        ...homeSelect,
         images: {
           select: {
             url: true,
@@ -77,13 +79,7 @@ export class HomeService {
   async getHomeById(id: number): Promise<HomeResponseDTO> {
     const home = await this.prismaService.home.findUnique({
       select: {
-        id: true,
-        address: true,
-        city: true,
-        price: true,
-        property_type: true,
-        number_of_bedrooms: true,
-        number_of_bathrooms: true,
+        ...homeSelect,
         images: {
           select: {
             url: true,
@@ -101,16 +97,19 @@ export class HomeService {
     return new HomeResponseDTO(home);
   }
 
-  async createHome({
-    address,
-    numberOfBedrooms,
-    numberOfBathrooms,
-    city,
-    landSize,
-    price,
-    propertyType,
-    images,
-  }: CreateHomeParams) {
+  async createHome(
+    {
+      address,
+      numberOfBedrooms,
+      numberOfBathrooms,
+      city,
+      landSize,
+      price,
+      propertyType,
+      images,
+    }: CreateHomeParams,
+    userId: number,
+  ) {
     const home = await this.prismaService.home.create({
       data: {
         address,
@@ -120,7 +119,7 @@ export class HomeService {
         land_size: landSize,
         price,
         property_type: propertyType,
-        realtor_id: 5,
+        realtor_id: userId,
       },
     });
 
@@ -133,7 +132,7 @@ export class HomeService {
     return new HomeResponseDTO(home);
   }
 
-  async updateHomeById(id, data: UpdateHomeParams) {
+  async updateHomeById(id: number, data: UpdateHomeParams) {
     const home = await this.prismaService.home.findUnique({
       where: {
         id,
@@ -157,7 +156,7 @@ export class HomeService {
   }
 
   async deleteHomeById(id) {
-    const deletedImages = await this.prismaService.image.deleteMany({
+    await this.prismaService.image.deleteMany({
       where: {
         home_id: id,
       },
