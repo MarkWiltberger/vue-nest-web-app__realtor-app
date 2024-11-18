@@ -6,6 +6,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { HomeResponseDTO } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
+import { UserInfo } from 'src/user/decorators/user.decorator';
 
 interface GetHomesParam {
   city?: string;
@@ -197,5 +198,18 @@ export class HomeService {
     }
 
     return home.realtor;
+  }
+
+  async inquire(buyer: UserInfo, homeId: number, message: string) {
+    const realtor = await this.getRealtorByHomeId(homeId);
+
+    return await this.prismaService.message.create({
+      data: {
+        realtor_id: realtor.id,
+        buyer_id: buyer.id,
+        home_id: homeId,
+        message,
+      },
+    });
   }
 }
