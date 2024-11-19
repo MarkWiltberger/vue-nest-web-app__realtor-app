@@ -212,4 +212,12 @@ export class HomeService {
       },
     });
   }
+
+  async getMessagesByHome(homeId: number) {
+    return await this.prismaService.message.findMany({
+      where: {
+        home_id: homeId,
+      },
+    });
+  }
 }
