@@ -1,21 +1,26 @@
-A web application built on a vue-nest scaffolding. The application has an API backend built on Nest.js and a web UI frontend built on Vue.js. Nest.js and Vue.js are JavaScript frameworks.
-# The Backend
-The backend is an API which serves requests for a realtor application. The user may create accounts and search for realty listings, and create new listings.
-## The API Endpoints
-The endpoints for the API are:  
- - **POST /auth/signup/{userType}**  
-Sign up a user of a designated user type.  
- - **POST /auth/signin**  
-Sign in a user with username and password.  
- - **POST /auth/key**  
-Generate a product key to authorize API requests.  
- - **GET /home**  
-Get a list of homes.  
- - **POST /home**  
-Create a new home listing.  
- - **GET /home/{id}**  
-Get a specific home.  
- - **PUT /home/{id}**  
-Update a specific home.  
- - **DELETE /home/{id}**  
-Delete a specific home.
+# Realtor App Backend Project
+
+<div  style="text-align: center;"><img src="/media/realtor-app-concept.png"  alt="Realtor App concept" style="width: 480px; height: auto;"></div>
+
+## Quick Links
+
+- **GitHub Repository:**
+- **Application Walkthrough:**
+- **Application Demo:**
+
+## Project Overview
+
+**Brief Description:**
+
+- The app allows a user to make http requests for a set of endpoints related to querying available realty properties.
+  - The user can request a full list of available properties.
+  - The user can also filter the list of properties based on the various attributes of the properties, such as price, city, and property type.
+  - Users with a REALTOR role can create, update, and delete realty listings.
+  - Users can message the realtor for the property with inquiries.
+
+**Technology Stack:**
+
+- **Frontend:** directory reserved for building a Vue.js frontend (JavaScript, Typescript)
+- **Backend:** Node.js, Express.js, Nest.js, Prisma ORM (JavaScript, Typescript)
+- **Database:** Postgres (SQL)
+- **Other Tools:** JWT for authentication (Javascript)
