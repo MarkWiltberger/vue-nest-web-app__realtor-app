@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from '../prisma/prisma.service';
 import { HomeService } from './home.service';
 import { PropertyType } from '@prisma/client';
+import { NotFoundException } from '@nestjs/common';
 
 const mockGetHomes = [
   {
@@ -81,6 +82,18 @@ describe('HomeService', () => {
         },
         where: filters,
       });
+    });
+
+    it('should throw a not found exception if no homes are found', async () => {
+      const mockPrismaFindManyHomes = jest.fn().mockReturnValue([]);
+
+      jest
+        .spyOn(prismaService.home, 'findMany')
+        .mockImplementation(mockPrismaFindManyHomes);
+
+      await expect(service.getHomes(filters)).rejects.toThrowError(
+        NotFoundException,
+      );
     });
   });
 });
