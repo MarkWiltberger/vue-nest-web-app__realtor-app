@@ -6,7 +6,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { HomeResponseDTO } from './dto/home.dto';
 import { PropertyType } from '@prisma/client';
-import { UserInfo } from 'src/user/decorators/user.decorator';
+import { UserInfo } from '../user/decorators/user.decorator';
 
 interface GetHomesParam {
   city?: string;
