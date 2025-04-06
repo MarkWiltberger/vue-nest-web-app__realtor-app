@@ -9,7 +9,15 @@ describe('HomeController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [HomeController],
-      providers: [HomeService, PrismaService],
+      providers: [
+        {
+          provide: HomeService,
+          useValue: {
+            getHomes: jest.fn().mockReturnValue([]),
+          },
+        },
+        PrismaService,
+      ],
     }).compile();
 
     controller = module.get<HomeController>(HomeController);
