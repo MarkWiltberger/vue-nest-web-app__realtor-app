@@ -90,5 +90,20 @@ describe('HomeController', () => {
         controller.updateHome(60, mockUpdateHomeParams, mockUserInfo),
       ).rejects.toThrowError(UnauthorizedException);
     });
+
+    it('should update home if realtor id is valid', async () => {
+      const mockUpdateHome = jest.fn().mockReturnValue(mockHome);
+
+      jest
+        .spyOn(homeService, 'updateHomeById')
+        .mockImplementation(mockUpdateHome);
+
+      await controller.updateHome(5, mockUpdateHomeParams, {
+        ...mockUserInfo,
+        id: 51,
+      });
+
+      expect(mockUpdateHome).toBeCalled();
+    });
   });
 });
